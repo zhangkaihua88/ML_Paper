@@ -2,7 +2,7 @@
 [toc]
 # 1. Generative Adversarial Nets
 >arXiv:1406.2661 [stat.ML]
-
+>tensorflow2代码：https://github.com/zhangkaihua88/ML_Paper
 
 ---
 

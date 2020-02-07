@@ -1,17 +1,18 @@
 <!-- toc -->
 [toc]
-# Conditional Generative Adversarial Nets
+# 1. Conditional Generative Adversarial Nets
 >arXiv:1411.1784 [cs.LG]
+>tensorflow2代码：https://github.com/zhangkaihua88/ML_Paper
 
 ---
 
-## 摘要
+## 1.1. 摘要
 在GAN的基础上引入标签y，同时使用在生成器和判别器中.
 可以应用于[多模态模型](https://www.jiqizhixin.com/graph/technologies/4468592f-93e9-4575-be91-fd64c0c6afe0)中。
 
 ---
 
-## 介绍
+## 1.2. 介绍
 生成对抗网络
 - 规避了棘手的概率计算
 - 不需要使用马尔科夫链，仅使用反向传播算法去获得梯度
@@ -21,9 +22,9 @@
 
 ---
 
-## 条件对抗网络
+## 1.3. 条件对抗网络
 
-### 符号定义
+### 1.3.1. 符号定义
 $x$ $\rightarrow$ 真实数据
 $y$ $\rightarrow$ 标签（辅助信息）
 $z$ $\rightarrow$ 噪音（生成器的输入数据）
@@ -35,32 +36,32 @@ $D()$ $\rightarrow$ 判别映射函数（可微），结构为多层感知机，
 $G(z;\theta_{g})$ $\rightarrow$ 将噪音$z$映射到新的数据空间
 $D(x ; \theta_{d})$ $\rightarrow$ $x$来自真实数据而不是生成数据的概率（真=1，假=0）
 
-### 知识回顾——生成对抗网络
+### 1.3.2. 知识回顾——生成对抗网络
 生成器G，判别器D，相互对抗使目标函数，达到最优。
 $$ \min _{G}\max _{ D } V(D,G)={ \mathbb{E} }_{ x ～ { p }_  { data } (x) }[logD(x)] + { \mathbb{E} }_{ z ～ { p }_{ z }(z) }[log(1-D(G(z)))]$$
 
-### 直观感受
+### 1.3.3. 直观感受
 ![20200205211839.png](https://image.zkhweb.top/20200205211839.png)
 
-### 目标函数
+### 1.3.4. 目标函数
 $$ \min _{G}\max _{ D } V(D,G)={ \mathbb{E} }_{ x ～ { p }_  { data } (x) }[logD(x|y)] + { \mathbb{E} }_{ z ～ { p }_{ z }(z) }[log(1-D(G(z|y)))] $$
 和原始GAN相近，只是G，D在y的条件下生成或判别
 
-### 对抗
+### 1.3.5. 对抗
 生成器G通过z，y联合生成图片
 判别器D在y的条件下判别G(z)
 主要是在y条件下的MinMax Game
 
 --- 
 
-## 实验
-### 单模式——MNIST
+## 1.4. 实验
+### 1.4.1. 单模式——MNIST
 
-### 多模式——MIR Flickr
+### 1.4.2. 多模式——MIR Flickr
 
 ---
 
-## 参考资料
+## 1.5. 参考资料
 [Paper---Conditional Generative Adversarial Nets](https://arxiv.org/abs/1411.1784)
 [知乎---《Conditional Generative Adversarial Nets》阅读笔记](https://zhuanlan.zhihu.com/p/23648795)
 [CSDN---Conditional Generative Adversarial Nets论文翻译](https://blog.csdn.net/Chaolei3/article/details/78870858)

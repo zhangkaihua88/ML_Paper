@@ -1,18 +1,19 @@
 <!-- toc -->
 [toc]
-# Maxout Networks
+# 1. Maxout Networks
 >arXiv:1302.4389 [stat.ML]
+>tensorflow2代码：https://github.com/zhangkaihua88/ML_Paper
 
 ---
 
-## 摘要
+## 1.1. 摘要
 maxout：
 - 旨在通过dropout来加快优化过程，并提高准确度（与drop共同使用）；
 - **模型的输出是模型输入的最大值**
 
 ---
 
-## 介绍
+## 1.2. 介绍
 dropout
 - 可以训练集成模型
 - 共享参数并近似的对这些模型的预测进行了平均
@@ -29,7 +30,7 @@ dropout与SDG
 
 ---
 
-## 回顾droupt
+## 1.3. 回顾droupt
 在给定输入向量$v$后，输出预测向量$y$，该构成包含了一系列的隐含层$h=\{h^{(1)},...,h^{(L)}\}$。
 Dropout训练一组由包含$v$和$h$中变量的子集组成的所有模型组成的模型。使用同一组参数$\theta$来标识一组分组$p(y | v ; \theta, \mu)$，其中$\mu \in M$是一个二进制掩码，用来决定模型中哪些变量参与运算。
 每次在训练集上进行训练时，我们都按照$\log p(y | v ; \theta, \mu)$的梯度对不同的$\mu$随机取样训练不同的子模型。
@@ -47,7 +48,7 @@ dropout与bagging
 
 ---
 
-## 模型maxout描述
+## 1.4. 模型maxout描述
 - 是一个简单的前馈框架模型
 - 使用了一个新的激活函数：**maxout unit**
 给定一个输入$ x \in \mathbb{R}^d$ （$x$可能是输入$v$,也可能是隐含层的状态），maxout隐含层的采用下式实现：
@@ -69,7 +70,7 @@ $$
 
 ---
 
-## Maxout是一个通用的近似器
+## 1.5. Maxout是一个通用的近似器
 
 ![20200206165136.png](https://image.zkhweb.top/20200206165136.png)
 
@@ -86,7 +87,7 @@ $$
 
 ---
 
-## maxout与relu
+## 1.6. maxout与relu
 relu表达式$h_{i}(x)=\operatorname{relu}\left(x^{T} W_{\cdots i}+b_{i}\right)=\max \left(x^{T} W_{\cdots i}+b_{i}, 0\right)$
 maxout表达式$h_{i}(x)=\max _{j \in[1, k]}\left(x^{T} W \ldots i j+b_{i j}\right)$
 
@@ -97,14 +98,14 @@ maxout表达式$h_{i}(x)=\max _{j \in[1, k]}\left(x^{T} W \ldots i j+b_{i j}\rig
 
 ---
 
-## 模型平均
+## 1.7. 模型平均
 - 单层softmax有对模型进行平均的能力，但是通过观察，多层模型中使用dropout也存在这样的模型平均，只是有拟合精度的问题。
 - 训练中使用dropout使得maxout单元有了更大的输入附近的线性区域，因为每个子模型都要预测输出，每个maxout单元就要学习输出相同的预测而不管哪些输入被丢弃。改变dropout mask将经常明显移动有效输入，从而决定了输入被映射到分段线性函数的哪一段。使用dropout训练的maxout具有一种特性，即当dropout mask改变时每个maxout单元的最大化滤波器相对很少变化。
 - **maxout网络中的线性和最大化操作可以让dropout的拟合模型平均的精度很高**。而一般的激活函数几乎处处都是弯曲的，因而dropout的拟合模型平均的精度不高。
 
 ---
 
-## 优化
+## 1.8. 优化
 - 训练中使用dropout时，maxout的优化性能比relu+max pooling好
 - dropout使用更大的步长最有效，使得目标函数有持续的波动性。而一般的SGD会使用更小的步长，来使得目标函数平滑的下降。dropout快速的探索着许多不同的方向然后拒绝那些损害性能的方向，而SGD缓慢而平稳的朝向最可能的方向移动。
 - 实验中SGD使得relu饱和在0值的时间少于5%，而dropout则超过60%。由于relu激活函数中的0值是一个常数，这就会阻止梯度在这些单元上传播（无论正向还是反向），这也就使得这些单元很难再次激活，这会导致很多单元由激活转变为非激活。而maxout就不会存在这样的问题，梯度在maxout单元上总是能够传播，即使maxout出现了0值，但是这些0值是参数的函数可以被改变，从而maxout单元总是激活的。单元中较高比例的且不易改变的0值会损害优化性能。
@@ -114,7 +115,7 @@ maxout表达式$h_{i}(x)=\max _{j \in[1, k]}\left(x^{T} W \ldots i j+b_{i j}\rig
 
 ---
 
-## 参考资料
+## 1.9. 参考资料
 [Paper---Maxout Networks](https://arxiv.org/abs/1302.4389)
 [CSD---Maxout Networks](https://blog.csdn.net/zhufenghao/article/details/52527047)
 [CSDN---论文笔记_Maxout Networks](https://blog.csdn.net/maqian5/article/details/91880468)
