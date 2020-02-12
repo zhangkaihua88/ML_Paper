@@ -1,5 +1,9 @@
 <!-- toc -->
 [toc]
+
+---
+
+
 # 1. Maxout Networks
 >arXiv:1302.4389 [stat.ML]
 >tensorflow2代码：https://github.com/zhangkaihua88/ML_Paper
